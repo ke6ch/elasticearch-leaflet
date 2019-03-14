@@ -1,0 +1,7 @@
+  <% data.forEach(function(val, key) { %>
+    L.marker([
+      <%= val.location.lat %>,
+      <%= val.location.lon %>
+    ],{title: "<%= val.facility %>"}
+    ).addTo(map);
+  <% }); %>
