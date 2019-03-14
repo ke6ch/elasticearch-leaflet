@@ -1,36 +1,22 @@
-const elasticsearch = require('elasticsearch');
-
-const client = new elasticsearch.Client({
-  host: "localhost:9200",
-  log: "debug",
-});
+const geoService = require('../services/geoService');
 
 exports.show = (req, res, next) => {
-  client.search({
-    index: "shiteihinanjo",
-    type: "_doc",
-    body: {
-      query: {
-        bool: {
-          must: [
-            {
-              match_all: { }
-            }
-          ]
-        }
-      }
-    }
+  geoService.search({
+    body: 'BBB'
   }).then((data) => {
-    const response = data.hits.hits.map((row) => {
-      return row._source;
-    });
-    const total = data.hits.total;
-    res.json({
-      response: {
-        numFound: total,
-        docs: response,
-      }
-    });
+    if (data.length == 0) {
+      res.status(404);
+      res.json({
+        message: 'Not Found',
+        type: 'Not Found'
+      });
+    } else {
+      res.render('./gis.ejs', { data });
+      res.status(200);
+      res.json({
+        docs: data,
+      });
+    };
   }).catch((err) => {
     next(err);
   });
