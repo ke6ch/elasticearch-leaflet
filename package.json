@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "start": "nodemon -L ./bin/www",
+    "build": "webpack --watch",
     "lint": "eslint ."
   },
   "dependencies": {
@@ -17,13 +18,22 @@
     "express-validator": "^5.3.1",
     "http-errors": "~1.6.2",
     "log4js": "^4.0.2",
-    "morgan": "~1.9.0"
+    "morgan": "~1.9.0",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4"
   },
   "devDependencies": {
+    "@babel/core": "^7.3.4",
+    "@babel/plugin-proposal-class-properties": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.5",
     "eslint": "^5.15.1",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.16.0",
     "jest": "^24.1.0",
-    "nodemon": "^1.18.10"
+    "nodemon": "^1.18.10",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0"
   }
 }
