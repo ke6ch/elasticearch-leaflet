@@ -45,3 +45,42 @@ exports.search = async (req) => {
 
   return source;
 }
+
+exports.route = async (req) => {
+  const body = req.body;
+
+  const params = {
+    size: 1,
+    body: {
+      query: {
+        bool: {
+          must: {
+            match_all: {}
+          }
+        }
+      },
+      sort: {
+        _geo_distance: {
+          location: {
+            lat: body.lat,
+            lon: body.lng,
+          },
+          order: 'asc',
+          unit: 'km',
+          mode: 'min',
+          distance_type: 'arc',
+        }
+      }
+    }
+  };
+
+  const response = await shiteihinanjo.search(params); 
+  if (response.hits.total == 0) {
+    return [];
+  }
+
+  const source = response.hits.hits.map((row) => {
+    return row._source;
+  });
+  return source;
+};
