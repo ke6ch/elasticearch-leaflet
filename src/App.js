@@ -5,7 +5,7 @@ export default class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <h1>Hello, React!</h1>
+        <h1>Search Shelter Route</h1>
         <Map />
       </div>
     )
